@@ -275,6 +275,50 @@ resulting in 1.
 \end{center}
 
 \section{Logistic Regression}
+
+\begin{align*}
+  U_0 &= \id\left(
+    \begin{bmatrix}
+      x^{(0)}_{1} \\
+      x^{(0)}_{2}
+  \end{bmatrix}\right) \\
+  U_1 &= \sigma\left(
+    \begin{bmatrix}
+      a\cdot\id\left( x^{(0)}_{1} \right) +
+      b\cdot\id\left( x^{(0)}_{2} \right) +
+      c\cdot\id\left( x^{(0)}_{3} \right) + d
+    \end{bmatrix}
+  \right)
+\end{align*}
+
+\begin{center}
+  \begin{tikzpicture}
+    \DrawNeuron{u0}{(0,0)}
+    {$U^{0}$}
+    {$
+      \begin{bmatrix}x\\y\\z
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    \DrawNeuron{u1}{(6,0)}
+    {$U^{1}$}
+    {$
+      \begin{bmatrix}x^{(1)}_{1}
+    \end{bmatrix}$}
+    {\textsc{Sigmoid}}
+
+    \draw[->] (u0) -- (u1);
+
+    \path let \p1 = ($(u0)!0.5!(u1)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{1}=
+      \begin{bmatrix}a&b&c
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{1}=
+      \begin{bmatrix}d
+    \end{bmatrix}$};
+  \end{tikzpicture}
+\end{center}
+
 \section{Two-Variable Function}
 
 \end{document}
