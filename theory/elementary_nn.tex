@@ -141,7 +141,8 @@ of $S$ and $S-1$. If $S\le 0$, then $0-0=0$. If $S>0$, then $S-(S-1)=1$.
   \end{bmatrix}\right) \\
   U_2 &= \id\left(
     \begin{bmatrix}
-      \relu\left( \id\left( x^{(0)}_{1} + x^{(0)}_{2} \right) \right) - \relu\left( \id\left( x^{(0)}_{1} + x^{(0)}_{2} \right) - 1 \right)
+      \relu\left( \id\left( x^{(0)}_{1} + x^{(0)}_{2} \right) \right)
+      - \relu\left( \id\left( x^{(0)}_{1} + x^{(0)}_{2} \right) - 1 \right)
     \end{bmatrix}
   \right)
 \end{align*}
@@ -193,6 +194,86 @@ of $S$ and $S-1$. If $S\le 0$, then $0-0=0$. If $S>0$, then $S-(S-1)=1$.
 \end{center}
 
 \section{Logical XOR}
+
+\[
+  \{0,1\}^2 \to \{0,1\}
+\] \marginpar{\raggedright TODO: what if more than 2 inputs?}
+
+We can think of binary XOR as returning 1 if the inputs are
+different, and 0 if they are the same. For the second case, we can
+take advantage of the fact that the difference between two identical
+numbers is 0. Thus, we take the ReLU of the difference between the
+two inputs in both directions, that is, $\relu\left( x^{(0)}_1 -
+x^{(0)}_2 \right)$ and $\relu\left( x^{(0)}_2 - x^{(0)}_1 \right)$.
+If the inputs are the same, $0+0=0$. If the inputs are different, the
+difference in one direction is 1 and the other is -1 rectified to 0,
+resulting in 1.
+
+\begin{align*}
+  U_0 &= \id\left(
+    \begin{bmatrix}
+      x^{(0)}_{1} \\
+      x^{(0)}_{2}
+  \end{bmatrix}\right) \\
+  U_1 &= \relu\left(
+    \begin{bmatrix}
+      \id\left( x^{(0)}_{1} - x^{(0)}_{2} \right) \\
+      \id\left( x^{(0)}_{2} - x^{(0)}_{1} \right)
+  \end{bmatrix}\right) \\
+  U_2 &= \id\left(
+    \begin{bmatrix}
+      \relu\left( \id\left( x^{(0)}_{1} - x^{(0)}_{2} \right) \right)
+      + \relu\left( \id\left( x^{(0)}_{2} - x^{(0)}_{1} \right) \right)
+    \end{bmatrix}
+  \right)
+\end{align*}
+
+\begin{center}
+  \begin{tikzpicture}
+    \DrawNeuron{u0}{(0,0)}
+    {$U^{0}$}
+    {$
+      \begin{bmatrix}x^{(0)}_{1}\\x^{(0)}_{2}
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    \DrawNeuron{u1}{(6,0)}
+    {$U^{1}$}
+    {$
+      \begin{bmatrix}x^{(1)}_{1}\\x^{(1)}_{2}
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    \draw[->] (u0) -- (u1);
+
+    % weights and biases 1
+    \path let \p1 = ($(u0)!0.5!(u1)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{1}=
+      \begin{bmatrix}1&-1\\-1&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{1}=
+      \begin{bmatrix}0\\0
+    \end{bmatrix}$};
+
+    \DrawNeuron{u2}{(12,0)}
+    {$U^{2}$}
+    {$
+      \begin{bmatrix}x^{(2)}_{1}
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    % weights and biases 2
+    \draw[->] (u1) -- (u2);
+    \path let \p1 = ($(u1)!0.5!(u2)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{2}=
+      \begin{bmatrix}1&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{2}=
+      \begin{bmatrix}0
+    \end{bmatrix}$};
+  \end{tikzpicture}
+\end{center}
+
 \section{Logistic Regression}
 \section{Two-Variable Function}
 
