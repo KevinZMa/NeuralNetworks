@@ -55,14 +55,14 @@
 \begin{center}
   \begin{tikzpicture}
     \DrawNeuron{u0}{(0,0)}
-    {$U^{0}$}
+    {$\mathbf{U}^0$}
     {$ % TODO: big or little x?
       \begin{bmatrix}x^{(0)}_{1}\\x^{(0)}_{2}
     \end{bmatrix}$}
     {\textsc{Id}}
 
     \DrawNeuron{u1}{(6,0)}
-    {$U^{1}$}
+    {$\mathbf{U}^1$}
     {$
       \begin{bmatrix}x^{(1)}_{1}
     \end{bmatrix}$}
@@ -96,14 +96,14 @@
 \begin{center}
   \begin{tikzpicture}
     \DrawNeuron{u0}{(0,0)}
-    {$U^{0}$}
+    {$\mathbf{U}^0$}
     {$
       \begin{bmatrix}x^{(0)}_{1}
     \end{bmatrix}$}
     {\textsc{Id}}
 
     \DrawNeuron{u1}{(6,0)}
-    {$U^{1}$}
+    {$\mathbf{U}^1$}
     {$
       \begin{bmatrix}x^{(1)}_{1}
     \end{bmatrix}$}
@@ -153,14 +153,14 @@ of $S$ and $S-1$. If $S\le 0$, then $0-0=0$. If $S>0$, then $S-(S-1)=1$.
 \begin{center}
   \begin{tikzpicture}
     \DrawNeuron{u0}{(0,0)}
-    {$U^{0}$}
+    {$\mathbf{U}^0$}
     {$
       \begin{bmatrix}x^{(0)}_{1}\\x^{(0)}_{2}
     \end{bmatrix}$}
     {\textsc{Id}}
 
     \DrawNeuron{u1}{(6,0)}
-    {$U^{1}$}
+    {$\mathbf{U}^1$}
     {$
       \begin{bmatrix}x^{(1)}_{1}\\x^{(1)}_{2}
     \end{bmatrix}$}
@@ -178,7 +178,7 @@ of $S$ and $S-1$. If $S\le 0$, then $0-0=0$. If $S>0$, then $S-(S-1)=1$.
     \end{bmatrix}$};
 
     \DrawNeuron{u2}{(12,0)}
-    {$U^{2}$}
+    {$\mathbf{U}^2$}
     {$
       \begin{bmatrix}x^{(2)}_{1}
     \end{bmatrix}$}
@@ -234,14 +234,14 @@ resulting in 1.
 \begin{center}
   \begin{tikzpicture}
     \DrawNeuron{u0}{(0,0)}
-    {$U^{0}$}
+    {$\mathbf{U}^0$}
     {$
       \begin{bmatrix}x^{(0)}_{1}\\x^{(0)}_{2}
     \end{bmatrix}$}
     {\textsc{Id}}
 
     \DrawNeuron{u1}{(6,0)}
-    {$U^{1}$}
+    {$\mathbf{U}^1$}
     {$
       \begin{bmatrix}x^{(1)}_{1}\\x^{(1)}_{2}
     \end{bmatrix}$}
@@ -259,7 +259,7 @@ resulting in 1.
     \end{bmatrix}$};
 
     \DrawNeuron{u2}{(12,0)}
-    {$U^{2}$}
+    {$\mathbf{U}^2$}
     {$
       \begin{bmatrix}x^{(2)}_{1}
     \end{bmatrix}$}
@@ -297,14 +297,14 @@ resulting in 1.
 \begin{center}
   \begin{tikzpicture}
     \DrawNeuron{u0}{(0,0)}
-    {$U^{0}$}
+    {$\mathbf{U}^0$}
     {$
       \begin{bmatrix}x\\y\\z
     \end{bmatrix}$}
     {\textsc{Id}}
 
     \DrawNeuron{u1}{(6,0)}
-    {$U^{1}$}
+    {$\mathbf{U}^1$}
     {$
       \begin{bmatrix}x^{(1)}_{1}
     \end{bmatrix}$}
@@ -359,5 +359,106 @@ resulting in 1.
     \end{axis}
   \end{tikzpicture}
 \end{center}
+
+\begin{center}
+  \begin{tikzpicture}[scale=0.95, transform shape]
+    \DrawNeuron{u0}{(0,0)}
+    {$\mathbf{U}^0$}
+    {$
+      \begin{bmatrix}x^{(0)}_{1}\\x^{(0)}_{2}
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    \DrawNeuron{u1}{(6,0)}
+    {$\mathbf{U}^1$}
+    {$
+      \begin{bmatrix}x^{(1)}_{1}\\x^{(1)}_{2}\\x^{(1)}_{3}\\x^{(1)}_{4}
+    \end{bmatrix}$}
+    {\textsc{ReLU}}
+
+    \draw[->] (u0) -- (u1);
+
+    % weights and biases 1
+    \path let \p1 = ($(u0)!0.5!(u1)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{1}=
+      \begin{bmatrix}1&0\\-1&0\\0&1\\0&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{1}=
+      \begin{bmatrix}0\\0\\-1\\-2
+    \end{bmatrix}$};
+
+    \DrawNeuron{u2}{(12,0)}
+    {$\mathbf{U}^2$}
+    {$
+      \begin{bmatrix}x^{(2)}_{1}\\x^{(2)}_{2}\\x^{(2)}_{3}
+    \end{bmatrix}$}
+    {\textsc{Id}}
+
+    % weights and biases 2
+    \draw[->] (u1) -- (u2);
+    \path let \p1 = ($(u1)!0.5!(u2)$) in
+    node[above=3pt] at (\p1) {\small\setlength{\arraycolsep}{2.5pt}$\textbf{W}^{2}=
+      \begin{bmatrix}1&1&0&0\\0&0&1&0\\0&0&0&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {\small\setlength{\arraycolsep}{2.5pt}$\textbf{b}^{2}=
+      \begin{bmatrix}-1\\0\\0
+    \end{bmatrix}$};
+
+    \DrawNeuron{u3}{(12,-6)}
+    {$\mathbf{U}^3$}
+    {$
+      \begin{bmatrix}x^{(3)}_{1}\\x^{(3)}_{2}\\x^{(3)}_{3}
+    \end{bmatrix}$}
+    {\textsc{ReLU}}
+
+    \draw[->,shorten >=16pt] (u2) -- (u3);
+
+    % weights and biases 3
+    \path let \p1 = ($(u2)!0.5!(u3)$) in
+    node[above=25pt,anchor=west] at ($(\p1)+(0.5,0)$) {\small\setlength{\arraycolsep}{2.5pt}$\textbf{W}^{3}=
+      \begin{bmatrix}1&0&0\\1&-1&0\\0&0&1
+    \end{bmatrix}$}
+    node[below=25pt,anchor=west] at ($(\p1)+(0.5,0)$) {\small\setlength{\arraycolsep}{2.5pt}$\textbf{b}^{3}=
+      \begin{bmatrix}0\\0\\0
+    \end{bmatrix}$};
+
+    \DrawNeuron{u4}{(6,-6)}
+    {$\mathbf{U}^4$}
+    {$
+      \begin{bmatrix}x^{(4)}_{1}\\x^{(4)}_{2}
+    \end{bmatrix}$}
+    {\textsc{ReLU}}
+
+    \draw[->] (u3) -- (u4);
+
+    % weights and biases 4
+    \path let \p1 = ($(u3)!0.5!(u4)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{4}=
+      \begin{bmatrix}1&-1&0\\0&0&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{4}=
+      \begin{bmatrix}0\\0
+    \end{bmatrix}$};
+
+    \DrawNeuron{u5}{(0,-6)}
+    {$\mathbf{U}^5$}
+    {$
+      \begin{bmatrix}x^{(5)}_{1}
+    \end{bmatrix}$}
+    {\textsc{ReLU}}
+
+    \draw[->] (u4) -- (u5);
+
+    \path let \p1 = ($(u4)!0.5!(u5)$) in
+    node[above=3pt] at (\p1) {$\textbf{W}^{5}=
+      \begin{bmatrix}1&1
+    \end{bmatrix}$}
+    node[below=3pt] at (\p1) {$\textbf{b}^{5}=
+      \begin{bmatrix}0
+    \end{bmatrix}$};
+  \end{tikzpicture}
+\end{center}
+
+% https://www.desmos.com/3d/dqgihefq42
 
 \end{document}
